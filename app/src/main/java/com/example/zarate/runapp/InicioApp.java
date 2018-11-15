@@ -22,6 +22,7 @@ public class InicioApp extends AppCompatActivity {
     int posicion = 0;
     MediaPlayer mp;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +33,8 @@ public class InicioApp extends AppCompatActivity {
         pbar = (ProgressBar) findViewById(R.id.prgrsBar_inicio);
 
         pbar.setVisibility(View.VISIBLE);
-       // mp = MediaPlayer.create(this,R);
-     //   mp.start();
+        mp = MediaPlayer.create(this,R.raw.intro);
+        mp.start();
 
         try{
             InputStream inputS = getAssets().open("rayman.gif");
@@ -63,6 +64,6 @@ public class InicioApp extends AppCompatActivity {
                 InicioApp.this.startActivity(new Intent(InicioApp.this, MainActivity.class));
                 InicioApp.this.finish();
             }
-        },3000);
+        },7500);
     }
 }

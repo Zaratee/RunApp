@@ -6,5 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/eTxt_correoMain"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/btn_334"
+        android:layout_marginBottom="65dp"
+        android:hint="Correo"/>
+
+    <EditText
+        android:id="@+id/eTxt_contraMain"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/btn_334"
+        android:layout_marginBottom="5dp"
+        android:hint="Contraseña"/>
+
+    <Button
+        android:id="@+id/btn_regMain"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_334"
+        android:layout_centerHorizontal="true"
+        android:text="Registrarse"
+        android:layout_marginTop="40dp"/>
+
+    <Button
+        android:id="@+id/btn_ingMain"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_334"
+        android:layout_centerHorizontal="true"
+        android:text="Ingresar"
+        android:layout_marginTop="95dp"/>
+
+    <Button
+        android:id="@+id/btn_334"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:text=""
+        android:visibility="invisible" />
 
 </RelativeLayout>
