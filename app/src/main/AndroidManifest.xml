@@ -21,8 +21,8 @@
         <activity android:name=".MenuApp" />
         <activity android:name=".AlimentacionApp" />
         <activity
-            android:name=".EjercicioApp"
-            android:label="@string/title_activity_ejercicio_app"
+            android:name=".EjercicioActi1"
+            android:label="@string/title_activity_ejercicio_acti1"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

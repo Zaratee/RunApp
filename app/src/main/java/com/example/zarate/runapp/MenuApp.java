@@ -19,7 +19,7 @@ public class MenuApp extends AppCompatActivity {
         Ejercicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent ejerIntet = new Intent(MenuApp.this,EjercicioApp.class);
+                Intent ejerIntet = new Intent(MenuApp.this,EjercicioActi1.class);
                 startActivity(ejerIntet);
             }
         });
