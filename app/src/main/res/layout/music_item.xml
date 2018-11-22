@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="85dp"
+        android:layout_height="80dp"
+        android:src="@drawable/musicicon"
+        android:id="@+id/songincon"/>
+    <TextView
+        android:id="@+id/txtVnombreCancion_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la cancion"
+        android:layout_toRightOf="@+id/songincon"
+        android:textSize="17dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000"/>
+    <TextView
+        android:id="@+id/txtVnombreArtista_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Artista"
+        android:layout_toRightOf="@+id/songincon"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000"
+        android:layout_below="@+id/txtVnombreCancion_item"
+        />
+    <ImageView
+        android:id="@+id/playicon"
+        android:layout_width="55dp"
+        android:layout_height="65dp"
+        android:src="@drawable/playicon"
+        android:layout_toLeftOf="@+id/stopicon" />
+    <ImageView
+        android:id="@+id/stopicon"
+        android:layout_width="55dp"
+        android:layout_height="65dp"
+        android:src="@drawable/stopicon"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

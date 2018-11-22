@@ -1,8 +1,14 @@
 package com.example.zarate.runapp;
 
-import android.content.Intent;
+
+import android.app.Activity;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,142 +18,166 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class Fragment_Ejercicio1 extends Fragment {
+import java.util.ArrayList;
+import java.util.Locale;
+
+public class Fragment_Ejercicio1 extends Fragment implements SensorEventListener{
 
     Button start,stop,pause;
-    TextView pasostxt,prueb1,prueb2;
-    Chronometer crono;
+    TextView cronometro,prueb1,prueb2,pasos;
     boolean iniciado,point=false;
-    long tiempo;
-    int i=0,bandera1=0,bandera2=0,delay=1000;
+
+    private static final long Start_time = 1800000;
+    private CountDownTimer mCountDown;
+    private boolean mTimerRun;
+
+    private long mTimeLeft = Start_time;
+
+    SensorManager sensorManager;
+    boolean running = false;
+
+    private ArrayList<MusicItem> arrayList;
+    private CustomMusicAdapter adapter;
+    private ListView songlist;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_ejercicio_app, container, false);
 
+        songlist = (ListView) v.findViewById(R.id.listVmusica_fragmentEje1);
+        arrayList = new ArrayList<>();
+        arrayList.add(new MusicItem("","",R.raw.intro));
+        arrayList.add(new MusicItem("","",R.raw.fate));
+        arrayList.add(new MusicItem("","",R.raw.flow));
+        arrayList.add(new MusicItem("","",R.raw.phantomGate));
+        /*
+        arrayList.add(new MusicItem("","",R.raw.));
+        arrayList.add(new MusicItem("","",R.raw.));
+        arrayList.add(new MusicItem("","",R.raw.));
+        arrayList.add(new MusicItem("","",R.raw.));
+        */
+
+
         start = (Button) v.findViewById(R.id.btnStart_fragmentEje1);
         stop = (Button) v.findViewById(R.id.btnStop_fragmentEje1);
         pause = (Button) v.findViewById(R.id.btnPause_fragmentEje1);
 
-        pasostxt = (TextView) v.findViewById(R.id.txtV_pasosfragmentEje1);
-        crono = (Chronometer) v.findViewById(R.id.chro_fragmentEje1);
+        cronometro = (TextView) v.findViewById(R.id.txtV_cronometro);
 
         prueb1=(TextView) v.findViewById(R.id.prueba1);
         prueb2=(TextView) v.findViewById(R.id.prueba2);
+        pasos = (TextView) v.findViewById(R.id.txtV_pasos);
 
         start.setEnabled(true);
         pause.setEnabled(false);
         stop.setEnabled(false);
 
-/*        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                start.setEnabled(false);
-                pause.setEnabled(true);
-                crono.setBase(SystemClock.elapsedRealtime());
-                crono.start();
-            }
-        });
-
-        pause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                start.setEnabled(true);
-                pause.setEnabled(false);
-                crono.stop();
-            }
-        });*/
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startCrono();
-                start.setEnabled(false);
-                pause.setEnabled(true);
-                stop.setEnabled(true);
+                startTimer();
+                running = true;
+                Sensor countS = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+                if(countS != null) {
+                    sensorManager.registerListener(Fragment_Ejercicio1.this,countS,SensorManager.SENSOR_DELAY_UI);//posible error cambiar act
+                }else {
+                    Activity activity = getActivity();
+                    Toast.makeText(activity,"Sensor no encontrado",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pauseCrono();
-                start.setEnabled(true);
-                pause.setEnabled(false);
-                stop.setEnabled(true);
-                start.setText("Resume");
+                pauseTimer();
+                running = false;
             }
         });
 
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stopCrono();
-                start.setEnabled(true);
-                pause.setEnabled(false);
-                stop.setEnabled(false);
-                start.setText("Start");
-
+                stopTimer();
             }
         });
 
+        updateCountDownText();
 
+        sensorManager  = (SensorManager)this.getActivity().getSystemService(EjercicioActi1.SENSOR_SERVICE);
         return v;
     }
-    void incremento(){
-        new Handler().postDelayed(new Runnable() {
+
+
+
+    private void startTimer(){
+        mCountDown = new CountDownTimer(mTimeLeft,1000) {
             @Override
-
-            public void run() {
-                i++;
-                i=bandera1;
-                pasostxt.setText(""+i);
-                incremento2();
-
+            public void onTick(long a) {
+                mTimeLeft = a;
+                updateCountDownText();
             }
-        }, delay);
-    }
 
-    void incremento2(){
-        new Handler().postDelayed(new Runnable() {
             @Override
-
-            public void run() {
-                i=bandera1;
-                i++;
-                pasostxt.setText(""+i);
-                incremento();
-
+            public void onFinish() {
+                mTimerRun = false;
+                start.setEnabled(true);
+                pause.setEnabled(false);
+                stop.setEnabled(false);
             }
-        }, delay);
+        }.start();
+
+        mTimerRun = true;
+        start.setEnabled(false);
+        pause.setEnabled(true);
+        stop.setEnabled(true);
     }
 
 
-    public void startCrono()
-    {
-            incremento();
-            crono.setBase(SystemClock.elapsedRealtime() - tiempo);
-            crono.start();
-            iniciado=true;
+    private void pauseTimer(){
+        mCountDown.cancel();
+        mTimerRun = false;
+
+        start.setEnabled(true);
+        pause.setEnabled(false);
+        stop.setEnabled(true);
 
     }
 
-    public void pauseCrono()
-    {
-        if (iniciado) {
-            crono.stop();
-            tiempo = SystemClock.elapsedRealtime() - crono.getBase();
-            iniciado=false;
-        }
+    private void stopTimer(){
+        mTimeLeft = Start_time;
+        updateCountDownText();
+
+
+        start.setEnabled(true);
+        pause.setEnabled(false);
+        stop.setEnabled(false);
     }
 
-    public void stopCrono()
-    {
-        crono.setBase(SystemClock.elapsedRealtime());
-        tiempo = 0;
+    private void updateCountDownText() {
+        int minutes = (int) (mTimeLeft /1000) /60;
+        int seconds = (int) (mTimeLeft /1000) %60;
+        int totalSeg=0, totalMin=0;
+        totalSeg = 60-seconds;
+        totalMin = 29-minutes;
+        String timeFormatted = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds);
+        prueb1.setText(""+totalMin);
+        prueb2.setText(""+totalSeg);
+        cronometro.setText(timeFormatted);
     }
 
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        pasos.setText(String.valueOf(sensorEvent.values[0]));
+    }
 
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
 }
