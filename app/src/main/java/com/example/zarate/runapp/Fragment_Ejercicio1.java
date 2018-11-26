@@ -51,16 +51,19 @@ public class Fragment_Ejercicio1 extends Fragment implements SensorEventListener
 
         songlist = (ListView) v.findViewById(R.id.listVmusica_fragmentEje1);
         arrayList = new ArrayList<>();
-        arrayList.add(new MusicItem("","",R.raw.intro));
-        arrayList.add(new MusicItem("","",R.raw.fate));
-        arrayList.add(new MusicItem("","",R.raw.flow));
-        arrayList.add(new MusicItem("","",R.raw.phantomGate));
-        /*
-        arrayList.add(new MusicItem("","",R.raw.));
-        arrayList.add(new MusicItem("","",R.raw.));
-        arrayList.add(new MusicItem("","",R.raw.));
-        arrayList.add(new MusicItem("","",R.raw.));
-        */
+        arrayList.add(new MusicItem("AEROLÍNEA CARRILLO", "T3r Elemento ft. Gerardo Ortiz", R.raw.aerolinacarrillo));
+        arrayList.add(new MusicItem("El malo de Culiacan", "Alfredo Olivas", R.raw.alfredo));
+        arrayList.add(new MusicItem("Sin pijama", "Becky G", R.raw.becky));
+        arrayList.add(new MusicItem("Fate", "Opening", R.raw.fate));
+        arrayList.add(new MusicItem("Flow", "Opening", R.raw.flow));
+        arrayList.add(new MusicItem("Ray man","Intro",R.raw.intro));
+        arrayList.add(new MusicItem("Phatnom Gate","Daniel",R.raw.phantomgate));
+        arrayList.add(new MusicItem("Run boy run","Woodkid",R.raw.runboy));
+
+        Activity activity = getActivity();
+
+        adapter = new CustomMusicAdapter(activity, R.layout.music_item,arrayList);
+        songlist.setAdapter(adapter);
 
 
         start = (Button) v.findViewById(R.id.btnStart_fragmentEje1);

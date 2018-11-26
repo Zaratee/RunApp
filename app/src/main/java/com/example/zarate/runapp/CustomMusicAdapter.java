@@ -1,6 +1,7 @@
 package com.example.zarate.runapp;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ public class CustomMusicAdapter extends BaseAdapter {
     private Context context;
     private int layout;
     private ArrayList<MusicItem> arrayList;
+    private MediaPlayer mediaPlayer;
+    private Boolean flag = true;
 
     public CustomMusicAdapter(Context context, int layout, ArrayList<MusicItem> arrayList) {
         this.context = context;
@@ -43,7 +46,7 @@ public class CustomMusicAdapter extends BaseAdapter {
     }
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
         if (view == null){
             viewHolder = new ViewHolder();
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -59,9 +62,39 @@ public class CustomMusicAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        MusicItem music = arrayList.get(i);
+        final MusicItem music = arrayList.get(i);
         viewHolder.txtNombre.setText(music.getNombre());
         viewHolder.txtArtista.setText(music.getSinger());
+
+        viewHolder.icPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag){
+                    mediaPlayer = MediaPlayer.create(context,music.getCancion());
+                    flag=false;
+                }
+                if(mediaPlayer.isPlaying())
+                        {
+                            mediaPlayer.pause();
+                            viewHolder.icPlay.setImageResource(R.drawable.playicon);
+                        }else{
+                    mediaPlayer.start();
+                    viewHolder.icPlay.setImageResource(R.drawable.playicon);
+                }
+
+            }
+        });
+        viewHolder.icStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!flag){
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                    flag = true;
+                }
+                viewHolder.icPlay.setImageResource(R.drawable.playicon);
+            }
+        });
         return view;
     }
 }
