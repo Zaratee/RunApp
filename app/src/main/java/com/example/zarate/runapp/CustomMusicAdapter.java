@@ -73,7 +73,7 @@ public class CustomMusicAdapter extends BaseAdapter {
                     mediaPlayer = MediaPlayer.create(context,music.getCancion());
                     flag=false;
                 }
-                if(mediaPlayer.isPlaying())
+                if(mediaPlayer.isPlaying()) 
                         {
                             mediaPlayer.pause();
                             viewHolder.icPlay.setImageResource(R.drawable.playicon);
