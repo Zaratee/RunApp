@@ -45,20 +45,8 @@ public class RegistroApp extends AppCompatActivity {
         Crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Corre1,Correo2,Contra1,Contra2;
-
-                Corre1 = Correo.getText().toString();
-                Correo2  = CorreoConf.getText().toString();
-                Contra1 = Contra.getText().toString();
-                Contra2 = ContraConfi.getText().toString();
 
                 register();
-
-                if(Corre1.equals(Correo2) && Contra1.equals(Contra2) && !Contra1.isEmpty() && !Contra2.isEmpty() && !Corre1.isEmpty() && !Correo2.isEmpty() )
-                    prueba.setText("vamos");
-                else
-                    prueba.setText("nope");
-
             }
         });
     }

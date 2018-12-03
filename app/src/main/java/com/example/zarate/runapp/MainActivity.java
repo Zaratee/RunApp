@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button ingresar, registrar;
     EditText correo, contraseña;
+    public static String Correo = "Caros";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         registrar = (Button) findViewById(R.id.btn_regMain);
         correo = (EditText) findViewById(R.id.eTxt_correoMain);
         contraseña = (EditText) findViewById(R.id.eTxt_contraMain);
+
+         TextView prueba = (TextView) findViewById(R.id.pruebaaa);
 
 
         ingresar.setOnClickListener(new View.OnClickListener() {
@@ -50,13 +55,15 @@ public class MainActivity extends AppCompatActivity {
                                             String valor = response.getString("Estado");
                                             switch(valor) {
                                                 case "OK":
+                                                    String corr;
+                                                    corr = correo.getText().toString();
+                                                    Correo= corr;
+                                                    iniciarAdmin.putExtra("correo",corr );
                                                     startActivity(iniciarAdmin);
                                                     break;
                                                 case "NO":
                                                     Toast.makeText(MainActivity.this,"Usuario no existe",Toast.LENGTH_SHORT).show();
                                             }
-
-
 
                                         } catch (JSONException e) {
                                             e.printStackTrace();

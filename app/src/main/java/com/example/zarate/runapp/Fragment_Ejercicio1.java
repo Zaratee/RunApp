@@ -3,6 +3,7 @@ package com.example.zarate.runapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -25,6 +26,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static com.example.zarate.runapp.MainActivity.Correo;
+
 public class Fragment_Ejercicio1 extends Fragment implements SensorEventListener{
 
     Button start,stop,pause;
@@ -44,10 +47,22 @@ public class Fragment_Ejercicio1 extends Fragment implements SensorEventListener
     private CustomMusicAdapter adapter;
     private ListView songlist;
 
+    String correoo;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_ejercicio_app, container, false);
+
+        start = (Button) v.findViewById(R.id.btnStart_fragmentEje1);
+        stop = (Button) v.findViewById(R.id.btnStop_fragmentEje1);
+        pause = (Button) v.findViewById(R.id.btnPause_fragmentEje1);
+
+        cronometro = (TextView) v.findViewById(R.id.txtV_cronometro);
+
+        prueb1=(TextView) v.findViewById(R.id.prueba1);
+        prueb2=(TextView) v.findViewById(R.id.prueba2);
+        pasos = (TextView) v.findViewById(R.id.txtV_pasos);
 
         songlist = (ListView) v.findViewById(R.id.listVmusica_fragmentEje1);
         arrayList = new ArrayList<>();
@@ -65,16 +80,7 @@ public class Fragment_Ejercicio1 extends Fragment implements SensorEventListener
         adapter = new CustomMusicAdapter(activity, R.layout.music_item,arrayList);
         songlist.setAdapter(adapter);
 
-
-        start = (Button) v.findViewById(R.id.btnStart_fragmentEje1);
-        stop = (Button) v.findViewById(R.id.btnStop_fragmentEje1);
-        pause = (Button) v.findViewById(R.id.btnPause_fragmentEje1);
-
-        cronometro = (TextView) v.findViewById(R.id.txtV_cronometro);
-
-        prueb1=(TextView) v.findViewById(R.id.prueba1);
-        prueb2=(TextView) v.findViewById(R.id.prueba2);
-        pasos = (TextView) v.findViewById(R.id.txtV_pasos);
+        prueb1.setText(Correo);
 
         start.setEnabled(true);
         pause.setEnabled(false);
@@ -169,7 +175,7 @@ public class Fragment_Ejercicio1 extends Fragment implements SensorEventListener
         totalSeg = 60-seconds;
         totalMin = 29-minutes;
         String timeFormatted = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds);
-        prueb1.setText(""+totalMin);
+        //prueb1.setText(""+totalMin);
         prueb2.setText(""+totalSeg);
         cronometro.setText(timeFormatted);
     }

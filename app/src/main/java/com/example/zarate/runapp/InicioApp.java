@@ -36,6 +36,27 @@ public class InicioApp extends AppCompatActivity {
         mp = MediaPlayer.create(this,R.raw.intro);
         mp.start();
 
+        try{
+            InputStream inputS = getAssets().open("rayman.gif");
+            byte[] bytes = IOUtils.toByteArray(inputS);
+            gifRay.setBytes(bytes);
+            gifRay.startAnimation();
+        }
+        catch (IOException ex)
+        {
+
+        }
+
+        try{
+            InputStream inputS = getAssets().open("paisaje.gif");
+            byte[] bytes = IOUtils.toByteArray(inputS);
+            gifBack.setBytes(bytes);
+            gifBack.startAnimation();
+        }
+        catch (IOException ex)
+        {
+
+        }
 
         new Handler().postDelayed(new Runnable() {
             @Override
