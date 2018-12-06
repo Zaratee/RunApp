@@ -1,22 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        <TextView
+            android:id="@+id/txtV_FechaEntreEje2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha de entrenamiento"
+            android:textSize="20dp"
+            android:layout_marginTop="30dp"
+            android:textColor="#000"
+            android:layout_marginLeft="20dp"/>
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/txtV_fechaEje2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DD/MM/AAAA"
+            android:layout_below="@+id/txtV_FechaEntreEje2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/txtV_pasoseEje2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pasos"
+            android:layout_below="@+id/txtV_fechaEje2"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/txtV_numPasos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30"
+            android:layout_below="@+id/txtV_pasoseEje2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"/>
+
+            <TextView
+            android:id="@+id/txtV_Tiempo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiempo"
+            android:layout_below="@+id/txtV_numPasos"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/txtV_Min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Min"
+            android:layout_below="@+id/txtV_Tiempo"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/txtV_Minutos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30"
+            android:layout_below="@+id/txtV_Min"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/txtV_Seg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seg"
+            android:layout_below="@+id/txtV_Tiempo"
+            android:layout_toRightOf="@+id/txtV_Min"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/txtV_Segundos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30"
+            android:layout_below="@+id/txtV_Min"
+            android:layout_toRightOf="@+id/txtV_Minutos"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="10dp" />
+
+
+</RelativeLayout>

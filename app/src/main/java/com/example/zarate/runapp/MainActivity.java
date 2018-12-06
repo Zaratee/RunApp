@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     Button ingresar, registrar;
     EditText correo, contraseña;
     public static String Correo = "Caros";
+    public static String Pasos  = "Caros";
+    public static String Minutos = "Caros";
+    public static String Segundos = "Caros";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -27,6 +27,9 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import static com.example.zarate.runapp.MainActivity.Correo;
+import static com.example.zarate.runapp.MainActivity.Minutos;
+import static com.example.zarate.runapp.MainActivity.Pasos;
+import static com.example.zarate.runapp.MainActivity.Segundos;
 
 public class Fragment_Ejercicio1 extends Fragment implements SensorEventListener{
 
@@ -48,6 +51,9 @@ public class Fragment_Ejercicio1 extends Fragment implements SensorEventListener
     private ListView songlist;
 
     String correoo;
+
+
+
 
     @Nullable
     @Override
@@ -80,7 +86,6 @@ public class Fragment_Ejercicio1 extends Fragment implements SensorEventListener
         adapter = new CustomMusicAdapter(activity, R.layout.music_item,arrayList);
         songlist.setAdapter(adapter);
 
-        prueb1.setText(Correo);
 
         start.setEnabled(true);
         pause.setEnabled(false);
@@ -113,6 +118,15 @@ public class Fragment_Ejercicio1 extends Fragment implements SensorEventListener
             @Override
             public void onClick(View view) {
                 stopTimer();
+                pasos.setText("25");
+                String pas,min,seg;
+                pas = pasos.getText().toString();
+                min = prueb1.getText().toString();
+                seg = prueb2.getText().toString();
+                Pasos= pas;
+                Minutos= min;
+                Segundos= seg;
+
             }
         });
 
@@ -175,7 +189,7 @@ public class Fragment_Ejercicio1 extends Fragment implements SensorEventListener
         totalSeg = 60-seconds;
         totalMin = 29-minutes;
         String timeFormatted = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds);
-        //prueb1.setText(""+totalMin);
+        prueb1.setText(""+totalMin);
         prueb2.setText(""+totalSeg);
         cronometro.setText(timeFormatted);
     }
